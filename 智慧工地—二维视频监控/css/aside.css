@@ -1,0 +1,39 @@
+.el-menu {
+    width:300px;
+}
+
+.font1{
+    margin-top: 0px;
+    margin-left:130px;
+    color: #e7e7e7;
+    font-size: 15px;
+    font-weight:bold;
+}
+
+.font3{
+    color:gray;
+    font-weight:bold;
+}
+.el-menu{
+    background-color:rgba(0,0,0,0);
+}
+.el-menu-item{
+    color:lightgray;
+}
+.ischeck{
+    background-color: red;
+}
+.el-menu-item:hover{
+    outline: 5px !important;
+    color: #409EFF !important;
+}
+.el-submenu:hover{
+    outline: 5px !important;
+    color: #409EFF !important;
+}
+.el-aside:hover {
+    width: 0;
+}
+.el-popover{
+    background: rgba(255,255,255);
+}

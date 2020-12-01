@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>智慧工地后台管理系统</title>
+    <script type="text/javascript" src="../public/vue.js"></script>
+    <script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+    <script type="text/javascript" src="../public/axios/dist/axios.js"></script>
+    <script type="text/javascript" src="../public/jquery-1.10.2.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/system.css"/>
+</head>
+<body>
+<el-container id="container1">
+    <!-- 头部区域 -->
+    <el-header>
+        <div style="display: flex;align-items: center;">
+            <img src="../src/assets/logo.png" alt="" height="50px">
+            <!-- span中的字体可在一行中单独设置效果 -->
+            <span style="margin-left: 15px;">智慧工地后台管理系统</span>
+        </div>
+        <!-- @click只是vue提供了一种模版语法，使冒泡、阻止默认行为更加方便，本质上还是和onClick用的一样的事件监听方式 -->
+        <el-button type="info" size="mini">退出</el-button>
+    </el-header>
+    <!-- 页面主体区域 -->
+    <el-container>
+        <!-- 右侧内容主体 -->
+        <el-main>
+            <!-- 紧急事件管理列表 -->
+            <a style="color:black;font-size: 20px;font-weight:bold;">紧急事件管理</a>
+            <hr>
+            <el-table :data="gridData" :cell-style="cellStyle">
+                <el-table-column type="index"></el-table-column>
+                <el-table-column property="location" label="视频监控点" width="150"></el-table-column>
+                <el-table-column property="time" label="时间" width="200"></el-table-column>
+                <el-table-column property="info" label="预警事件信息" width="200px"></el-table-column>
+                <el-table-column property="status" label="处理/信息" width="200px">
+                    <el-button @click="delete_event" type="danger" plain size="mini" >删除事件</el-button>
+                </el-table-column>
+                <el-table-column  label="图片信息" >
+                    <el-image
+                            style="width: 100px; height: 100px"
+                            :src="url"
+                            :preview-src-list="srcList">
+                    </el-image>
+                </el-table-column>
+            </el-table>
+            <br>
+            <span style="font-size: 15px;">批量删除:</span>
+            <el-button type="info" size="mini" @click="delete_one">1个月内</el-button>
+            <el-button type="info" size="mini">三个月内</el-button>
+            <el-button type="info" size="mini">半年内</el-button>
+            <hr>
+            <br>
+
+            <!-- 视点管理列表 -->
+            <a style="color:black;font-size: 20px;font-weight:bold;">视点管理</a>
+            <hr>
+            <el-table :data="viewData">
+                <el-table-column type="index"></el-table-column>
+                <el-table-column property="location" label="视点名" width="150"></el-table-column>
+                <el-table-column property="time" label="信息1" width="200"></el-table-column>
+                <el-table-column property="info" label="信息2" width="200px"></el-table-column>
+                <el-table-column property="status" label="信息3" width="200px"></el-table-column>
+                <el-table-column property="status" label="删除视点" >
+                    <el-button @click="delete_view" type="danger" plain size="mini" style="position: absolute; left:0;top: 22%;">删除视点</el-button>
+                </el-table-column>
+            </el-table>
+            <el-button @click="view_add_visible" type="success" plain size="mini" style="margin-top: 10px" icon="el-icon-plus">添加视点</el-button>
+            <hr>
+
+            <!-- 添加视点表单 -->
+            <el-dialog title="添加视点" :visible.sync="dialogFormVisible">
+                <el-form :model="form">
+                    <el-form-item label="视点名称" :label-width="formLabelWidth">
+                        <el-input v-model="form.location" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="信息1" :label-width="formLabelWidth">
+                        <el-input v-model="form.time" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="信息2" :label-width="formLabelWidth">
+                        <el-input v-model="form.info" autocomplete="off"></el-input>
+                    </el-form-item>
+                    <el-form-item label="信息3" :label-width="formLabelWidth">
+                        <el-input v-model="form.status" autocomplete="off"></el-input>
+                    </el-form-item>
+                </el-form>
+                <div slot="footer" class="dialog-footer">
+                    <el-button @click="dialogFormVisible = false">取 消</el-button>
+                    <el-button type="primary" @click="view_add">确 定</el-button>
+                </div>
+            </el-dialog>
+
+
+        </el-main>
+    </el-container>
+</el-container>
+<script type="text/javascript" src="js/system.js"></script>
+</body>
+</html>
+

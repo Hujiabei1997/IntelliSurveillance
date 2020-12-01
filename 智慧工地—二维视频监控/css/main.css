@@ -1,0 +1,25 @@
+.font2{
+    color:lightgray;
+    font-size: 20px;
+    font-weight:bold;
+}
+.el-pagination{
+    color: whitesmoke;
+    background: rgba(0,0,0,0);
+    margin-left: 40%;
+}
+.el-dialog, .el-pager li {
+    background: none;
+    font-weight: bold;
+}
+.el-pagination .btn-next, .el-pagination .btn-prev {
+    background: none !important;
+    color: whitesmoke;
+    font-weight: bold;
+}
+.el-pagination__total{
+    color: whitesmoke;
+}
+
+
+

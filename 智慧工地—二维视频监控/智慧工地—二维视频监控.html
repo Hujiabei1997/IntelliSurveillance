@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <title>二维视频监控</title>
+    <script type="text/javascript" src="../public/vue.js"></script>
+    <script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+    <script type="text/javascript" src="../public/axios/dist/axios.js"></script>
+    <script type="text/javascript" src="../public/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../public/hls.js"></script>
+    <script type="text/javascript" src="../public/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/aside.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <style lang="scss" scoped>
+        .aside1{
+            background-color: rgb(30, 32, 29);
+        }
+        html,
+        body,
+        .el-container1{
+            padding:0px;
+            margin:0px;
+            height:100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- 全局容器 -->
+    <el-container class="el-container1 aside1" style="height: 100%; border: 1px solid rgb(49,49,39)" id="container" >
+        <!-- 侧边栏 -->
+        <el-aside>
+            <el-menu :default-openeds="['1']" id="video">
+                <el-submenu index="1" >
+                    <template slot="title" class="aside1">
+                        <i class="el-icon-video-camera" style="font-size: 25px" @click="test"></i>
+                        <a class="font2">北一区</a>
+                    </template>
+                       <el-menu-item  class="font3" :index="i + '' " v-for="(item,i) in info_video" :key="i">
+                            <span>{{item}}</span>
+                               <el-switch
+                                    v-model="value[i]"
+                                    active-color="#13ce66"
+                                    inactive-color="#ff4949"
+                                    style="left: 70%; position: absolute; top: 32%"
+                                    @change="count_change(i)">
+                                </el-switch>
+                        </el-menu-item>
+                </el-submenu>
+            </el-menu>
+        </el-aside>
+        <!-- 主内容区 -->
+        <el-main>
+                <a class="font2">视频监控</a>
+                <i class="el-icon-menu"  style="cursor:pointer; font-size: 25px; color:whitesmoke;right: 20px;margin-top: 5px; position: absolute"  @click="big"></i>
+                <a style="color: whitesmoke; right: 46px; margin-top: 6px; font-weight: bolder; position: absolute">|</a>
+                <i class="el-icon-s-grid" style="cursor:pointer; font-size: 25px; color:whitesmoke;right: 50px; margin-top: 5px;position: absolute"  @click="small"></i>
+                <hr>
+                <div>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                    <video :width="wi ? '33%' : '49%'"  :height="he ? '32%' : '46%'" controls>
+                        <source src="../src/assets/video_test.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </el-main>
+    </el-container>
+<script>
+
+</script>
+    <script type="text/javascript" src="js/container.js"></script>
+</body>
+</html>

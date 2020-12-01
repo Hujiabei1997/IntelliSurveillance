@@ -1,0 +1,154 @@
+.aside1{
+    padding-right:250px;
+    background-color: rgba(0,0,0,0.7);
+    height:100%;
+    position: absolute;
+    z-index: 0;
+    display: inline;
+}
+.aside2{
+    height:100%;
+    background-image: linear-gradient(to left, rgba(0,0,0,0), rgba(0,0,0,0.7));
+    margin-left:250px;
+    position:absolute;
+    width:70px;
+    z-index: -100;
+    display: inline;
+}
+.el-icon-caret-left{
+    margin-left: 260px;
+    position: absolute;
+    font-size: 45px;
+    color: whitesmoke;
+    margin-top: 385px;
+    opacity: 0.6;
+    cursor: pointer;
+    display: inline;
+}
+.el-icon-caret-right{
+    margin-left: 0;
+    position: absolute;
+    font-size: 45px;
+    color: whitesmoke;
+    margin-top: 385px;
+    opacity: 0.6;
+    display: none;
+    cursor: pointer;
+}
+.el-select1{
+    position: absolute;
+    margin-top: 70%;
+    margin-left: 10%;
+}
+.el-select2{
+    position: absolute;
+    margin-top: 125%;
+    margin-left: 10%;
+}
+.el-select3{
+    position: absolute;
+    margin-top: 180%;
+    margin-left: 10%;
+}
+.img_video{
+    position: absolute;
+    margin-top: 50%;
+    margin-left: 10%;
+    width: 200px;
+    height: 100px;
+}
+.img_view{
+    position: absolute;
+    margin-top: 110%;
+    margin-left: 10%;
+    width: 200px;
+    height: 100px;
+}
+.img_switch{
+    position: absolute;
+    margin-top: 165%;
+    margin-left: 10%;
+    width: 200px;
+    height: 100px;
+}
+.footer_video_font{
+    position:absolute;
+    margin-top: 15px;
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: bold;
+    color: whitesmoke;
+}
+.video_zone1{
+    position: absolute;
+    width: 300px;
+    margin-left: 330px;
+}
+.video_zone2{
+    position: absolute;
+    width: 300px;
+    margin-left: 635px;
+}
+.video_zone3{
+    position: absolute;
+    width: 300px;
+    margin-left: 940px;
+}
+.video_font{
+    position:absolute;
+    margin-left: 23%;
+    margin-top: 7%;
+    color: #e7e7e7;
+    font-weight: bold;
+    font-size: 20px;
+}
+.view_font{
+    position:absolute;
+    margin-left: 25%;
+    margin-top: 1.5%;
+    color: #e7e7e7;
+    font-weight: bold;
+    font-size: 20px;
+}
+.switch_font{
+    position:absolute;
+    margin-left: 5%;
+    margin-top: 1.5%;
+    color: #e7e7e7;
+    font-weight: bold;
+    font-size: 20px;
+}
+.aside_menu{
+    top:420px;
+    z-index: 9999;
+    position: absolute;
+    width: 250px;
+    border-radius:10px;
+    background-color: rgba(0,0,0,0.2);
+}
+.el-menu{
+    background-color:rgba(0,0,0,0);
+
+}
+.font1{
+    font-size: 18px;
+    color: whitesmoke;
+    font-weight: bold;
+}
+.font2{
+    font-size: 15px;
+    color: whitesmoke;
+    font-weight: bold;
+}
+.el-popover{
+    position: absolute;
+    margin-top:420px;
+    margin-left: 250px;
+    background-color: rgba(0,0,0,0.4);
+    border: none;
+}
+.el-checkbox{
+    color: whitesmoke;
+}
+
+

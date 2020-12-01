@@ -1,0 +1,90 @@
+.event_count{
+    width:210px;
+    height:70px;
+    position: fixed;
+    margin-top: 120px;
+    background-color: rgba(255,128,64,0.5);
+    border-radius: 15px 0 0px 0;
+    right: 0;
+    cursor: pointer;
+}
+.event_font{
+    position: absolute;
+    margin-left: 25%;
+    margin-top: 6%;
+}
+.event_font1{
+    font-size: 15px;
+    color: #eeeeee;
+    vertical-align:middle;
+    margin: 0px ;
+}
+.event_font2{
+    font-size: 15px;
+    color: #eeeeee;
+    vertical-align:middle;
+    margin: 0px;
+    position: absolute;
+}
+.picture1{
+    margin-left: 8%;
+    margin-top: 5%;
+    position: absolute;
+}
+.el-table,
+.el-table__expanded-cell {
+    background-color: transparent !important;
+}
+.el-table th,
+.el-table tr,
+.el-table td {
+    background-color: transparent !important;
+    color: #e7e7e7;
+}
+.el-table tbody tr:hover>td {
+    background-color: #367f7f78 !important
+}
+.el-table__row--striped td {
+    background-color: #45797b33 !important
+}
+.el-table__row:not(.el-table__row--striped) {
+    background: #1439391c !important;
+}
+.el-table{
+    color: #e7e7e7;
+    font-weight: bold;
+}
+.el-dialog1{
+    background-color: rgba(255,0,0,0.4)!important;
+}
+.el-breadcrumb{
+    position: absolute;
+    margin-left: 600px;
+    margin-top: -22px;
+    font-size: 15px;
+}
+.el-breadcrumb__inner{
+    color: #e7e7e7;
+    cursor: pointer;
+    font-weight: bold;
+}
+.el-breadcrumb__item:last-child .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner a, .el-breadcrumb__item:last-child .el-breadcrumb__inner a:hover, .el-breadcrumb__item:last-child .el-breadcrumb__inner:hover {
+    font-weight: 400;
+    color: #e7e7e7;
+    cursor: pointer;
+    font-weight: bold;
+}
+.el-carousel__item h3 {
+    color: #475669;
+    font-size: 14px;
+    opacity: 0.75;
+    line-height: 200px;
+    margin: 0;
+    width:100px;
+}
+.el-carousel__item:nth-child(2n) {
+    background-color: #99a9bf;
+}
+.el-carousel__item:nth-child(2n+1) {
+    background-color: #d3dce6;
+}

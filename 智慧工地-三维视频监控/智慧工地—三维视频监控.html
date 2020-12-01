@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>三维视频监控_new</title>
+    <script type="text/javascript" src="../public/vue.js"></script>
+    <script src="https://unpkg.com/element-ui@2.13.2/lib/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.13.2/lib/theme-chalk/index.css">
+    <script type="text/javascript" src="../public/axios/dist/axios.js"></script>
+    <script type="text/javascript" src="../public/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" src="../public/hls.js"></script>
+    <script type="text/javascript" src="../public/config.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/aside.css" />
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="css/warning.css" />
+    <link rel="stylesheet" type="text/css" href="css/event.css" />
+    <style>
+        /* 背景图片 */
+        #web_bg{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width:100%;
+            height:100%;
+            z-index:-100;
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: -111;
+        }
+    </style>
+</head>
+<body>
+<div id="web_bg" style="background-image: url(img/1.jpg);">
+    <!-- 左侧栏透明黑色部分 -->
+    <div  class="aside1" id="aside">
+        <!-- 监控点开关选择 -->
+        <div class="img_video">
+            <img style="position: absolute; margin-top: 10px; margin-left: 3px" src="img/4.jpg" width="37" height="35" >
+            <a class="video_font">监控点开关</a>
+        </div>
+        <el-select id="video" v-model="on_off_selected" filterable
+                   multiple collapse-tags
+                   placeholder="请选择开启监控点" class="el-select1" @change="video_change">
+            <el-option
+                    v-for="(item,index) in info_video"
+                    :key="index"
+                    :label="item"
+                    :value="index">
+            </el-option>
+        </el-select>
+
+        <!-- 视点集模块 -->
+        <div class="img_view">
+            <img style="position: absolute" src="img/3.jpg" width="40" height="35">
+            <a class="view_font">视点集</a>
+        </div>
+        <el-select id="view" v-model="view_selected" filterable
+                   clearable placeholder="请选择视点集" class="el-select2">
+            <el-option
+                    v-for="(item,index) in info_view"
+                    :key="index"
+                    :label="item"
+                    :value="index">
+            </el-option>
+        </el-select>
+
+        <!-- 视频分析下拉菜单功能模块 -->
+        <div class="aside_menu">
+            <el-menu :default-openeds="['1']" id="menu">
+                <el-submenu index="1">
+                    <template slot="title">
+                        <i class="el-icon-video-camera" style="font-size: 22px"></i>
+                        <a class="font1">智能监控</a>
+                    </template>
+                    <el-menu-item class="font2" :index="i + ''" v-for="(item,i) in menu_view_video" :key="i" >
+                        <span style="left: 20px; position: absolute">{{item}}</span>
+                        <el-button @click="video_analysis_switch" type="primary" size="mini" style="position: absolute;left: 75%;top: 22%; background-color:rgba(0,255,0,0.3);">分析</el-button>
+                    </el-menu-item>
+                </el-submenu>
+            </el-menu>
+        </div>
+    </div>
+
+    <!-- 控制左侧边栏收缩和展开-->
+    <div id="fold_div" >
+        <el-tooltip class="item" effect="dark" content="点击隐藏侧边栏" placement="right">
+            <i class="el-icon-caret-left" @click="foldaside" id="fold"></i>
+        </el-tooltip>
+    </div>
+    <div id="unfold_div">
+        <el-tooltip class="item" effect="dark" content="点击展开侧边栏" placement="right">
+         <i class="el-icon-caret-right" @click="unfoldaside" id="unfold"></i>
+        </el-tooltip>
+    </div>
+
+    <!-- 视频分析弹出框 -->
+    <el-popover
+            placement="right"
+            width="160"
+            v-model="video_analysis_dialog"
+            id="video_analysis">
+        <el-checkbox-group v-model="analysis_on">
+            <el-checkbox :label="item" name="type" v-for="(item,i) in analysis_content" :key="i"></el-checkbox>
+        </el-checkbox-group>
+        <div style="text-align: right; margin-top: 20px">
+            <el-button size="mini" type="text" @click="cancel_analysis">取消</el-button>
+            <el-button type="primary" size="mini" @click="commit_analysis">确定</el-button>
+        </div>
+    </el-popover>
+
+    <!-- 左侧栏渐变黑色部分 -->
+    <div class="aside2" id="aside2"></div>
+
+    <!-- 底栏 -->
+    <div class="footer">
+        <!-- 底栏透明黑色部分 -->
+        <div class="footer1" id="video_live">
+            <i class="el-icon-arrow-left" v-on:click="switch_video_left"></i>
+            <div style="border-right-style:solid; border-width: 1px; border-color: whitesmoke; width: 305px; margin-left: 330px; position: absolute"><video id="video1" controls="controls" muted></video></div>
+            <div style="border-right-style:solid; border-width: 1px; border-color: whitesmoke; width: 305px; margin-left: 640px; position: absolute"><video id="video2" controls="controls" muted></video></div>
+            <video controls="controls" id="video3" muted style="margin-left: 950px; position: absolute"></video>
+            <i class="el-icon-arrow-right" v-on:click="switch_video_right"></i>
+        </div>
+        <!-- 底栏渐变黑色部分 -->
+        <div class="footer2">
+            <img src="img/6.jpg" style="margin-left: 330px; margin-top: 17px" width="30" height="22">
+            <a class="footer_video_font">已开启视频监控</a>
+            <div id="video_name" style="position: absolute; margin-left: 550px; top: 17px; color: whitesmoke; font-weight: bold" >
+                <span>{{ name_live[name_i1] }}</span> |
+                <span>{{ name_live[name_i2] }}</span> |
+                <span>{{ name_live[name_i3] }}</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 事件统计模块 -->
+    <div id="event" class="event_count" @click="eventdialogvisible">
+            <img src="img/8.jpg" class="picture1" width="33px" height="30px">
+            <el-tooltip class="item" effect="dark" content="点击显示紧急事件记录" placement="top">
+                <div class="event_font">
+                    <p class="event_font1"><b>当日事件</b>实时统计</p>
+                    <p class="event_font2"><b style="font-size: 20px">{{num}}</b> 件</p>
+                </div>
+            </el-tooltip>
+        </div>
+
+    <!-- 预警模块 -->
+    <div id="warning" class="warning" @click="warningtdialogvisible">
+        <img class="picture2" src="img/7.jpg" width="33px" height="33px">
+        <div class="warning_font">
+            <p style="margin:0px; font-size:16px">最近事件预警!</p>
+            <p style="margin:0px; color:white; font-size:14px">监控点：{{location}}</p>
+            <p style="margin:0px; color:white; font-size:14px">时间：{{time}}</p>
+            <p style="margin:0px; color:white; font-size:14px">预警信息：{{info}}</p>
+            <a style="margin:0px; color:white; font-size:14px">状态:</a>
+            <a id="state" style="margin:0px; color:red; font-size:15px">{{status}}</a>
+        </div>
+    </div>
+
+    <!-- 事件模块对话框 -->
+    <el-dialog id="event_dialog"title="警报信息" :visible.sync="eventdialogvisible" style="width: 110%">
+        <el-table :data="gridData" :cell-style="cellStyle">
+            <el-table-column property="location" label="监控点" width="150"></el-table-column>
+            <el-table-column property="time" label="时间" width="200"></el-table-column>
+            <el-table-column property="info" label="预警信息"></el-table-column>
+            <el-table-column property="status" label="状态"></el-table-column>
+            <el-table-column property="status" label="处理/信息">
+                <el-button @click="handle" type="primary" size="mini" style="position: absolute; left: -10px;top: 22%; background-color:rgba(0,255,0,0.3);">确认</el-button>
+                <el-button @click="analysis_result" type="primary" size="mini" style="position: absolute; left: 25%;top: 22%; background-color:rgba(0,47,167,0.3);">事件帧</el-button>
+            </el-table-column>
+        </el-table>
+    </el-dialog>
+
+    <!-- 预警模块对话框 -->
+    <el-dialog
+            id="warning_dialog"
+            title="危险事件警报!"
+            :visible.sync="warningdialogVisible"
+            width="30%"
+            height="20%"
+            class="el-dialog1">
+        <span>
+            <a style="margin:0px; color:white; font-size:15px; font-weight:bold">监控点：{{warning_info.data.camera_name}}</a>
+            <a style="margin-left:30px; color:white; font-size:15px; font-weight:bold">时间：{{warning_info.data.time}}</a>
+        </span>
+        <div style="width: 300px; height: 330px">
+            <el-image
+                    style="width: 300px; height: 300px;margin-top: 20px; margin-left: 30px;position: absolute;z-index:1000"
+                    :src="warning_info.data.frame_url"
+                    :fit="'cover'">
+            </el-image>
+            <canvas id="myCanvas" width="70" height="65" style="border:2px solid green;z-index: 9999;margin-top: 50px; margin-left: 88px;position: absolute"></canvas>
+        </div>
+        <span slot="footer" class="dialog-footer">
+            <el-button @click="warningdialogVisible = false" size="mini">取 消</el-button>
+            <el-button type="primary" @click="invisiblewarning" size="mini">确 定</el-button>
+        </span>
+    </el-dialog>
+
+</div>
+<script type="text/javascript"></script>
+<script type="text/javascript" src="js/video.js"></script>
+<script type="text/javascript" src="js/view.js"></script>
+<script type="text/javascript" src="js/live.js"></script>
+<script type="text/javascript" src="js/menu.js"></script>
+<script type="text/javascript" src="js/video_analysis.js"></script>
+<script type="text/javascript" src="js/event_warning.js"></script>
+<script type="text/javascript" src="js/simulation.js"></script>
+<script type="text/javascript" src="js/fold_unfold.js"></script>
+<!--<script type="text/javascript" src="js/test.js"></script>-->
+</body>
+</html>
